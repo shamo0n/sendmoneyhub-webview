@@ -3,6 +3,7 @@ import { StyleSheet, Alert, Platform, Button, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
 import * as FileSystem from 'expo-file-system';
+import { Linking } from 'react-native';
 import * as Sharing from 'expo-sharing';
 import { useToast } from 'react-native-toast-notifications';
 import { PermissionsAndroid } from 'react-native';
@@ -42,7 +43,13 @@ export default function HomeScreen() {
   // Detect and download PDFs when clicked inside the WebView
   const handleShouldStartLoad = (event: any) => {
     const { url } = event;
-
+  // Handle tel:, mailto:, etc.
+  if (url.startsWith('tel:') || url.startsWith('mailto:')) {
+    Linking.openURL(url).catch(err =>
+      Alert.alert('Error', 'Failed to open URL: ' + err.message)
+    );
+    return false; // Prevent WebView from trying to load it
+  }
     // If a PDF link is clicked, intercept and handle it
     if (url.endsWith('.pdf')) {
       console.log('Detected PDF URL:', url);
@@ -113,24 +120,25 @@ export default function HomeScreen() {
         ref={webViewRef}
         source={{ uri: 'https://liveexshield.ca/Sendmoneyhub' }}
         style={styles.webView}
-        javaScriptEnabled
-        domStorageEnabled
-        allowFileAccess
-        allowUniversalAccessFromFileURLs
-        mixedContentMode="always"
-        originWhitelist={['*']}
-        scalesPageToFit
-        startInLoadingState
-        allowsInlineMediaPlayback
+        javaScriptEnabled={true}         // Ensures JavaScript is enabled
+        domStorageEnabled={true}         // Ensures localStorage/sessionStorage works
+        allowFileAccess={true}           // Allows access to local files
+        allowUniversalAccessFromFileURLs={true}
+        mixedContentMode="always"        // Allows mixed content (HTTP and HTTPS)
+        originWhitelist={['*']}          // Whitelist all domains for loading content
+        scalesPageToFit={true}           // Allows page scaling
+        startInLoadingState={true}       // Show loading indicator on page load
+        allowsInlineMediaPlayback={true} // Allows inline media playback
         allowFileAccessFromFileURLs={true}
-        mediaPlaybackRequiresUserAction={false}
-        onShouldStartLoadWithRequest={handleShouldStartLoad}
-        onMessage={handleMessage}  // Add the onMessage prop to handle messages
+        mediaPlaybackRequiresUserAction={false} // Autoplay for media if needed
+        onShouldStartLoadWithRequest={handleShouldStartLoad}  // Handle URL requests
+        onMessage={handleMessage}        // Handle messages sent from the WebView content
         onError={(syntheticEvent) => {
           const { nativeEvent } = syntheticEvent;
           Alert.alert('Error', `Failed to load: ${nativeEvent.description}`);
         }}
-      />
+        />
+
     </SafeAreaView>
   );
 }

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Send Money Hub",
     "slug": "sendmoneyhub-webview",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./icon.png",
     "scheme": "myapp",
@@ -11,6 +11,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.sendmoneyhub.app",
+      "buildNumber": "2",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "NSCameraUsageDescription": "uses the camera to capture identity verification documents",
