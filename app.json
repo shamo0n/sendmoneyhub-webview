@@ -2,9 +2,9 @@
   "expo": {
     "name": "Send Money Hub",
     "slug": "sendmoneyhub-webview",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "orientation": "portrait",
-    "icon": "./icon.png",
+    "icon": "./assets/images/adaptive-icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -19,6 +19,7 @@
       }
     },
     "android": {
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
