@@ -2,33 +2,32 @@
   "expo": {
     "name": "Send Money Hub",
     "slug": "sendmoneyhub-webview",
-    "version": "1.0.3",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/images/adaptive-icon.png",
-    "scheme": "myapp",
+    "scheme": "sendmoneyhub",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "com.sendmoneyhub.app",
       "buildNumber": "2",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
+        "UIDeviceFamily": [1],
         "NSCameraUsageDescription": "uses the camera to capture identity verification documents",
         "NSMicrophoneUsageDescription": "This app requires access to the microphone."
       }
     },
     "android": {
-      "versionCode": 2,
+      "versionCode": 4,
+      "softwareKeyboardLayoutMode": "resize",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.liveex.sendmoneyhub",
-      "permissions": [
-        "CAMERA",
-        "RECORD_AUDIO"
-      ]
+      "edgeToEdgeEnabled": true,
+      "package": "com.liveex.sendmoneyhub"
     },
     "web": {
       "bundler": "metro",
@@ -51,9 +50,7 @@
       "typedRoutes": true
     },
     "extra": {
-      "router": {
-        "origin": false
-      },
+      "router": {},
       "eas": {
         "projectId": "9f016c4b-2e6b-4052-ad1d-215a1675f420"
       }
